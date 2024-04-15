@@ -25,27 +25,59 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new tag
-  Tag.create(req.body);
+  try {
+    const tagData = await Tag.create(req.body);
+    res.status(200).json(tagData);
+  } catch (error) {
+    res.status(500).json(err);
+  }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
-  Tag.update(req.body, {
-    where: {
-      id: req.params.id,
-    }
-  })
+  try {
+    const tagData = await Tag.update(req.body, { where: { id: req.params.id } });
+    res.status(200).json(tagData);
+  } catch (error) {
+    res.status(404).json({ message: 'Tag not found' });
+  }
 });
 
-router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
-  Tag.destroy({
-    where: {
-      id: req.params.id,
-    },
-  })
+router.delete('/:id', async (req, res) => {
+  // Delete a tag by its `id` value
+  try {
+    const tagData = Tag.destroy({ where: { id: req.params.id } })
+    res.status(200).json({ message: 'Tag deleted successfully' });
+  } catch (error) {
+    res.status(404).json({ error: 'Tag not found' });
+  }
+
 });
 
 module.exports = router;
+
+
+
+
+
+
+// .then(numDeletedRows => {
+//   if (numDeletedRows === 1) {
+//     res.status(200).json({ message: 'Tag deleted successfully' });
+//   } else {
+//     res.status(404).json({ error: 'Tag not found' });
+//   }
+// })
+// .catch(err => {
+//   res.status(500).json({ error: 'Internal server error' });
+// });
+
+// router.delete('/:id', (req, res) => {
+//   // delete on tag by its `id` value
+
+//   const tagData = Tag.destroy({ where: { id: req.params.id } });
+//   res.status(200).json(tagData);
+
+// });
