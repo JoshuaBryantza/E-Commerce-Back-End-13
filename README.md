@@ -33,7 +33,7 @@
 
 ## Demo
 
-![Link Text](https://drive.google.com/file/d/1kft7ca9MNi9HmPqzUyjuvELkT9ByUCbv/view)
+![Video Demo](https://drive.google.com/file/d/1kft7ca9MNi9HmPqzUyjuvELkT9ByUCbv/view)
 
 ## License
 
